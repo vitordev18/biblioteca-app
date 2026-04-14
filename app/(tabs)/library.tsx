@@ -13,13 +13,20 @@ import {
 } from 'react-native';
 import { Book, useBooks } from '../../hooks/useBooks';
 
-const BookCard = memo(function BookCard({ book, onDelete }: { book: Book; onDelete: () => void }) {
+const BookCard = memo(function BookCard({ book, onDelete, onRead }: { book: Book; onDelete: () => void; onRead: () => void }) {
   return (
     <View style={styles.card}>
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle}>{book.title}</Text>
         <Text style={styles.cardAuthor}>{book.author}</Text>
       </View>
+      <TouchableOpacity
+        onPress={onRead}
+        style={[styles.readButton, book.isRead && { opacity: 0.5 }]}
+        disabled={book.isRead}
+      >
+        <Text style={styles.readText}>{book.isRead ? 'Lido' : 'Ler'}</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
         <Text style={styles.deleteText}>Excluir</Text>
       </TouchableOpacity>
@@ -36,6 +43,7 @@ export default function LibraryScreen() {
     setNewBookAuthor,
     addToLibrary,
     deleteBook,
+    markAsRead,
   } = useBooks();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -100,7 +108,11 @@ export default function LibraryScreen() {
             data={filteredLibrary}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <BookCard book={item} onDelete={() => deleteBook(item.id, false)} />
+              <BookCard
+                book={item}
+                onDelete={() => deleteBook(item.id, false)}
+                onRead={() => markAsRead(item.id)}
+              />
             )}
             contentContainerStyle={styles.listScroll}
             ListEmptyComponent={
@@ -132,6 +144,8 @@ const styles = StyleSheet.create({
   cardTitle: { fontSize: 18, fontWeight: '700', color: '#F8FAFC', marginBottom: 4 },
   cardAuthor: { fontSize: 14, color: '#94A3B8', fontWeight: '500' },
   deleteButton: { paddingVertical: 8, paddingHorizontal: 12 },
+  readButton: { paddingVertical: 8, paddingHorizontal: 12 },
   deleteText: { color: '#EF4444', fontSize: 14, fontWeight: '600' },
+  readText: { color: '#10B981', fontSize: 14, fontWeight: '600' },
   emptyLabel: { textAlign: 'center', color: '#64748B', marginTop: 60, fontSize: 16, lineHeight: 24 },
 });

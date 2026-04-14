@@ -6,8 +6,8 @@ import { useBooks } from '../../hooks/useBooks';
 export default function GoalsScreen() {
   const { library, readingGoal, setReadingGoal } = useBooks();
 
-  const totalRead = library?.length || 0;
-  const progress = Math.min((totalRead / readingGoal) * 100, 100);
+  const totalRead = library?.filter((book) => book.isRead).length || 0;
+  const progress = readingGoal > 0 ? Math.min((totalRead / readingGoal) * 100, 100) : 0;
 
   return (
     <SafeAreaView style={styles.safeArea}>
