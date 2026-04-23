@@ -1,5 +1,8 @@
+import ImageViewer from '@/components/ImageViewer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Text, View } from 'react-native';
+
+const PlaceholderImage = require('@/assets/images/icon.png');
 
 export default function HomeScreen() {
   return (
@@ -9,13 +12,49 @@ export default function HomeScreen() {
       </View>
       <Text style={styles.title}>Minha Biblioteca</Text>
       <Text style={styles.subtitle}>Organize suas leituras de forma profissional.</Text>
+      <View style={styles.imageContainer}>
+        <ImageViewer imgSource={PlaceholderImage} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0F172A', alignItems: 'center', justifyContent: 'center', padding: 20 },
-  iconCircle: { width: 180, height: 180, borderRadius: 90, backgroundColor: '#1E293B', alignItems: 'center', justifyContent: 'center', marginBottom: 30, borderWidth: 1, borderColor: '#334155' },
-  title: { color: '#F8FAFC', fontSize: 32, fontWeight: '800', marginBottom: 10 },
-  subtitle: { color: '#94A3B8', fontSize: 16, textAlign: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  imageContainer: {
+    flex: 1,
+  },
+  image: {
+    width: 320,
+    height: 440,
+    borderRadius: 18,
+  },
+  iconCircle: {
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: '#1E293B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 30,
+    borderWidth: 1,
+    borderColor: '#334155',
+  },
+  title: {
+    color: '#F8FAFC',
+    fontSize: 32,
+    fontWeight: '800',
+    marginBottom: 10,
+  },
+  subtitle: {
+    color: '#94A3B8',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
