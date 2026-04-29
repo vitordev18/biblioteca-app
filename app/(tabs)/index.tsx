@@ -1,6 +1,7 @@
 import ImageViewer from '@/components/ImageViewer';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Text, View } from 'react-native';
+import Button from '../../components/Button';
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -14,6 +15,10 @@ export default function HomeScreen() {
       <Text style={styles.subtitle}>Organize suas leituras de forma profissional.</Text>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} />
+      </View>
+      <View style={styles.footerContainer}>
+        <Button label="Choose a Photo"></Button>
+        <Button label="Use this Photo"></Button>
       </View>
     </View>
   );
@@ -56,5 +61,9 @@ const styles = StyleSheet.create({
     color: '#94A3B8',
     fontSize: 16,
     textAlign: 'center',
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: 'center',
   },
 });
