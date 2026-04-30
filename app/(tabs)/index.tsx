@@ -17,7 +17,7 @@ export default function HomeScreen() {
         <ImageViewer imgSource={PlaceholderImage} />
       </View>
       <View style={styles.footerContainer}>
-        <Button label="Choose a Photo"></Button>
+        <Button theme="primary" label="Select a Photo"></Button>
         <Button label="Use this Photo"></Button>
       </View>
     </View>
