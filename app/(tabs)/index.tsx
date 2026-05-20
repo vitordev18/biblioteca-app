@@ -1,24 +1,42 @@
 import ImageViewer from '@/components/ImageViewer';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../../components/Button';
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 export default function HomeScreen() {
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    } else {
+      alert('Você não selecionou nenhuma imagem.');
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.iconCircle}>
-        <Ionicons name="library" size={100} color="#6366F1" />
+      <View style={styles.header}>
+        <Text style={styles.title}>Minha Biblioteca</Text>
+        <Text style={styles.subtitle}>Organize suas leituras de forma profissional.</Text>
       </View>
-      <Text style={styles.title}>Minha Biblioteca</Text>
-      <Text style={styles.subtitle}>Organize suas leituras de forma profissional.</Text>
+
       <View style={styles.imageContainer}>
-        <ImageViewer imgSource={PlaceholderImage} />
+        <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
       </View>
+
       <View style={styles.footerContainer}>
-        <Button theme="primary" label="Select a Photo"></Button>
-        <Button label="Use this Photo"></Button>
+        <Button theme="primary" label="Selecionar uma foto" onPress={pickImageAsync} />
+        <Button label="Usar esta foto" />
       </View>
     </View>
   );
@@ -29,38 +47,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#0F172A',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
   },
-  imageContainer: {
-    flex: 1,
-  },
-  image: {
-    width: 320,
-    height: 440,
-    borderRadius: 18,
-  },
-  iconCircle: {
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    backgroundColor: '#1E293B',
+  header: {
+    paddingTop: 60,
+    paddingBottom: 20,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: '#334155',
   },
   title: {
     color: '#F8FAFC',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '800',
-    marginBottom: 10,
+    marginBottom: 6,
   },
   subtitle: {
     color: '#94A3B8',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
   footerContainer: {
     flex: 1 / 3,
