@@ -21,10 +21,42 @@ export default function TabLayout() {
           headerShown: false,
         }}
       >
-        <Tabs.Screen name="index" options={{ title: 'Início', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={24} /> }} />
-        <Tabs.Screen name="library" options={{ title: 'Estante', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'library' : 'library-outline'} color={color} size={24} /> }} />
-        <Tabs.Screen name="wishlist" options={{ title: 'Desejos', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'heart' : 'heart-outline'} color={color} size={24} /> }} />
-        <Tabs.Screen name="goals" options={{ title: 'Metas', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'flag' : 'flag-outline'} color={color} size={24} /> }} />
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Início',
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? 'home' : 'home-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="library"
+          options={{
+            title: 'Estante',
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? 'library' : 'library-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="wishlist"
+          options={{
+            title: 'Desejos',
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? 'heart' : 'heart-outline'} color={color} size={24} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="goals"
+          options={{
+            title: 'Metas',
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name={focused ? 'flag' : 'flag-outline'} color={color} size={24} />
+            ),
+          }}
+        />
       </Tabs>
     </BooksProvider>
   );
